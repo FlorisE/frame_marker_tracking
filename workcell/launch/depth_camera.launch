@@ -1,0 +1,8 @@
+<launch>
+  <include file="$(find workcell)/launch/motion_capture.launch" />
+  <node name="depth_camera" pkg="rc_visard_driver" type="rc_visard_driver" args="_device:=:02912345 _enable_tf:=True _autostart_dynamics:=True _autostop_dynamics:=True" />
+
+  <node pkg="tf" type="static_transform_publisher" name="depth_camera_left" args="0.0235 0.08 0 0 0 0 depth_camera depth_camera_left 1000" />
+  <node pkg="qualisys_to_depth_sensor_transformer" type="node" name="qualisys_to_depth_sensor" />
+  <node pkg="depth_camera_leveller" type="node" name="depth_camera_leveller" />
+</launch>

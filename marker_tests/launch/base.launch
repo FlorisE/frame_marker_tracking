@@ -1,0 +1,44 @@
+<launch>
+
+  <arg name="robot_name" default="rrr1" />
+  <arg name="urdf_path" default="$(find marker_tests)/urdf/$(arg robot_name).urdf" />
+  <arg name="marker_path" default="$(find marker_tests)/markers/$(arg robot_name).xml" />
+  <arg name="marker_topic" default="/markers" />
+  <arg name="gui" default="true" />
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg urdf_path)" />
+  <param name="use_gui" value="$(arg gui)" />
+
+  <node pkg="tf" type="static_transform_publisher" name="mocap_to_first" args="0.25 0.25 0 0 0 0 mocap first 1000" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" required="true" />
+  
+  <node name="marker_tests_node" pkg="marker_tests" type="marker_tests_node">
+    <param name="marker_path" type="str" value="$(arg marker_path)" />
+    <param name="markers" type="str" value="$(arg marker_topic)" />
+    <param name="source_frame" type="str" value="mocap" />
+  </node>
+
+  <node pkg="marker_visualization" type="node" name="marker_visualization">
+    <param name="marker_default_r" type="double" value="0" />
+    <param name="marker_default_g" type="double" value="1" />
+    <param name="marker_default_b" type="double" value="0" />
+    <param name="marker_default_a" type="double" value="1" />
+    <remap from="~markers" to="$(arg marker_topic)" />
+  </node>
+
+  <node pkg="frame_marker_tracking" type="frame_marker_tracking_estimator" name="frame_marker_tracking_estimator">
+    <param name="urdf_path" type="str" value="$(arg urdf_path)" />
+    <param name="marker_path" type="str" value="$(arg marker_path)" />
+    <param name="markers" type="str" value="$(arg marker_topic)" />
+    <param name="source_frame" type="str" value="first" />
+    <param name="global_frame" type="str" value="mocap" />
+  </node>
+
+  <node pkg="frame_marker_tracking" type="frame_marker_tracking_transform_estimator" name="transform_estimator">
+    <param name="marker_path" type="str" value="$(arg marker_path)" />
+  </node>
+
+</launch>

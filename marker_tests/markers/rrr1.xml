@@ -1,0 +1,14 @@
+<markerFrames>
+  <frame id="first" joint_type="fixed">
+    <marker mocap_id="1" label="">0 0 0.1</marker>
+  </frame>
+  <frame id="second" joint_type="revolute">
+    <marker mocap_id="2" label="">0 0 0.1</marker>
+  </frame>
+  <frame id="third" joint_type="revolute">
+    <marker mocap_id="3" label="">0 0 0.1</marker>
+  </frame>
+  <frame id="fourth" joint_type="revolute">
+    <marker mocap_id="4" label="">0 0 0.1</marker>
+  </frame>
+</markerFrames>

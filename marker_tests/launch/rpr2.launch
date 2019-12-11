@@ -1,0 +1,7 @@
+<launch>
+
+  <arg name="robot_name" default="rpr2" />
+
+  <include file="$(find marker_tests)/launch/base.launch" pass_all_args="true" />
+
+</launch>

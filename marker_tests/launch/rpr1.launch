@@ -1,0 +1,7 @@
+<launch>
+
+  <arg name="model" default="$(find marker_tests)/urdf/rpr1.urdf" />
+
+  <include file="$(find marker_tests)/launch/base.launch" pass_all_args="true" />
+
+</launch>

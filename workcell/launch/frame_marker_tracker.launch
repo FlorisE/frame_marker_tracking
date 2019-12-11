@@ -1,0 +1,9 @@
+<launch>
+  <node pkg="frame_marker_tracking" type="frame_marker_tracking_estimator" name="frame_marker_tracking_estimator">
+    <param name="urdf_path" type="str" value="/home/floris/src/cranex7/src/crane_x7_ros/crane_x7_description/urdf/crane_x7.urdf" />
+    <param name="marker_path" type="str" value="/home/floris/src/mocap_measurements/markers.xml" />
+    <param name="markers" type="str" value="/qualisys/markers" />
+    <param name="source_frame" type="str" value="base_link" />
+    <param name="global_frame" type="str" value="mocap" />
+  </node>
+</launch>

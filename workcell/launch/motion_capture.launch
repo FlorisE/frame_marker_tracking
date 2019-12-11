@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find mocap_qualisys)/launch/qualisys.launch" />
+
+  <!--<node pkg="tf" type="static_transform_publisher" name="qualisys_to_base_link" args="0.196 0.236 0 1.570796 0 0 mocap base_link 100" />-->
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_qualisys" args="-0.236 0.176 0 -1.570796 0 0 base_link mocap 100" />
+  <node pkg="marker_visualization" type="node" name="marker_visualization">
+    <param name="marker_default_r" type="double" value="0" />
+    <param name="marker_default_g" type="double" value="1" />
+    <param name="marker_default_b" type="double" value="0" />
+    <param name="marker_default_a" type="double" value="1" />
+    <remap from="~markers" to="/qualisys/markers" />
+  </node>
+</launch>

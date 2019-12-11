@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find mocap_qualisys)/launch/qualisys.launch" />
+
+  <node pkg="tf" type="static_transform_publisher" name="qualisys_to_base_link" args="0.246 0.246 0 0 0 0 mocap base_link 1000" />
+  <node pkg="tf" type="static_transform_publisher" name="depth_camera_left" args="0.0235 0.08 0 0 0 0 depth_camera depth_camera_left 1000" />
+  <node pkg="marker_visualization" type="node" name="marker_visualization" />
+  <node pkg="qualisys_to_depth_sensor_transformer" type="node" name="qualisys_to_depth_sensor" />
+  <node pkg="depth_camera_leveller" type="node" name="depth_camera_leveller" />
+</launch>
